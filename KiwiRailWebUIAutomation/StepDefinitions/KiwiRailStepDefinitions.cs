@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using KiwiRailWebUIAutomation.PageObjects;
+﻿using KiwiRailWebUIAutomation.PageObjects;
+using KiwiRailWebUIAutomation.Support;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
@@ -17,20 +17,26 @@ namespace KiwiRailWebUIAutomation.StepDefinitions
         [Given(@"I navigate to the Kiwi Rail Website")]
         public void GivenINavigateToTheKiwiRailWebsite()
         {
-            _mainPage.Navigate("https://www.kiwirail.co.nz/");
+            // Gets the website URL from appsettings.json
+            _mainPage.Navigate(TestConfiguration.GetSectionAndValue("Settings","url"));
         }
 
-        [When(@"I hover over the Primary Navigation Menu Option :")]
-        public void WhenIHoverOverThePrimaryNavigationMenuOption(Table table)
+        [When(@"I hover over the Primary Navigation menu : (.*)")]
+        public void WhenIHoverOverThePrimaryNavigationMenu(string navMenu)
         {
-            var menuItem = table.Rows.First();
-            _mainPage.HoverOverTheNavigationMenu(menuItem[0]);
+            _mainPage.HoverOverTheNavigationMenu(navMenu);
         }
 
-        [Then(@"I verify that the menu contains items :")]
-        public void ThenIVerifyThatTheMenuContainsItems(Table table)
+        [When(@"I click the menu item : (.*)")]
+        public void WhenIClickTheMenuItem(string item)
         {
-            ScenarioContext.Current.Pending();
+            _mainPage.ClickNavigationMenuItem(item);
+        }
+
+        [Then(@"I verify that I am on the page : (.*)")]
+        public void ThenIVerifyThatIAmOnThePage(string pageHeader)
+        {
+            Assert.AreEqual(pageHeader,_mainPage.GetPageHeader());
         }
 
         [Then(@"I verify that I am on Kiwi Rail Website Main Page")]

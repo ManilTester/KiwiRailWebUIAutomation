@@ -27,8 +27,7 @@ namespace KiwiRailWebUIAutomation.Support
         [BeforeScenario(Order = 0)]
         public void BeforeScenario()
         {
-            // GetDriver(Convert.ToBoolean(ConfigurationManager.AppSettings["headless"]));
-            GetDriver(false);
+            GetDriver();
         }
 
         [AfterScenario]
@@ -42,6 +41,10 @@ namespace KiwiRailWebUIAutomation.Support
             _driver?.Dispose();
         }
 
+        /// <summary>
+        /// Take screenshot of the page when test script is failing
+        /// </summary>
+        /// <param name="scenarioContext"></param>
         private void TakeScreenshot(ScenarioContext scenarioContext)
         {
             try
@@ -57,18 +60,29 @@ namespace KiwiRailWebUIAutomation.Support
             }
         }
 
-        public IWebDriver GetDriver(bool headless)
+        /// <summary>
+        /// Create and initialize driver
+        /// </summary>
+        /// <returns></returns>
+
+        public IWebDriver GetDriver()
         {
+            // Get browser to be used for testing from appsettings.json
+            var browser = TestConfiguration.GetSectionAndValue("BrowserOptions", "Browser");
             if (_driver == null)
             {
-                switch ("Chrome")
+                switch (browser)
                 {
                     case "Chrome":
                         ChromeOptions chromeOptions = new ChromeOptions();
-                        if (headless)
+                        chromeOptions.AddArgument("--window-size=1920,1080");
+
+                        // Get value for headless option from appsettings.json
+
+                        var headless = TestConfiguration.GetSectionAndValue("BrowserOptions", "Headless");
+
+                        if (headless == "true")
                         {
-                            chromeOptions.AddArgument("--window-size=1920,1080");
-                            chromeOptions.AddArgument("--start-maximized");
                             chromeOptions.AddArgument("--headless");
                         }
 
