@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using BoDi;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -86,7 +87,7 @@ namespace KiwiRailWebUIAutomation.Support
                             chromeOptions.AddArgument("--headless");
                         }
 
-                        _driver = new ChromeDriver(Environment.CurrentDirectory, chromeOptions);
+                        _driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),chromeOptions);
                         break;
                 }
 
