@@ -14,8 +14,15 @@ Folder Structure and Pattern details:
                   
 4) Support : It contains TestConfiguration.cs , this is used to read the value from the appsettings.json file that contains
              different internal project values as url for kiwirail website and browseroptions to be provided to hooks.cs.
-             
              It contains Hooks.cs , this file is brain behind the framework as this is where driver is registered before test run 
              and disposed after test run . Browser selection and intialization is done with different options.
  
-  
+
+# Execution Details:
+
+To execute above tests:
+i) Download and install VS 2019 and open the solution file : KiwiRailWebUIAutomation.sln. 
+ii) Build the project.
+iii) If you don't see the TestExplorer , Goto Test --> TestExplorer . Run the tests from there.
+
+Note: Tests will run in headless mode by default as in the appsettings.json , headless = true , set it to false to run in GUI mode.
