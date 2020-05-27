@@ -29,6 +29,9 @@ Note: Tests will run in headless mode by default as in the appsettings.json , he
 
 # Release Pipeline:
 i) Test Project build and publish pipeline : 
+Below pipeline builds the testing project and publishes artifacts for release pipeline to run.
+
+https://dev.azure.com/kapoormanil/KiwiRailWebUiAutomation/_build?definitionId=6&_a=summary
 
 ii) Release Pipeline for the project that runs the actual test: It consists of the Automation Run Stage.
 
