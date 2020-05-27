@@ -26,3 +26,14 @@ ii) Build the project.
 iii) If you don't see the TestExplorer , Goto Test --> TestExplorer . Run the tests from there.
 
 Note: Tests will run in headless mode by default as in the appsettings.json , headless = true , set it to false to run in GUI mode.
+
+# Release Pipeline:
+i) Test Project build and publish pipeline : 
+
+ii) Release Pipeline for the project that runs the actual test: It consists of the Automation Run Stage.
+
+https://dev.azure.com/kapoormanil/KiwiRailWebUiAutomation/_release?_a=releases&view=mine&definitionId=1
+
+Example: A successful run : https://dev.azure.com/kapoormanil/KiwiRailWebUiAutomation/_releaseProgress?_a=release-environment-logs&releaseId=4&environmentId=4
+
+Note : Under Tests you will find the test results.
